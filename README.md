@@ -1,6 +1,6 @@
 # Wedspace
 
-**Platform web untuk membantu pasangan mempersiapkan pernikahan dengan lebih tenang dan terorganisir.**
+**Platform web untuk membantu pasangan mempersiapkan pernikahan dengan lebih terorganisir.**
 
 > "Kalau user gak bayar pun, dia tetap bisa nikah dengan tenang pakai produk ini."
 
@@ -8,87 +8,106 @@
 
 ## Tentang Aplikasi
 
-Wedspace adalah personal wedding planner berbasis web dengan model **workspace per pasangan**. Membantu pasangan dalam:
+Wedspace adalah personal wedding planner berbasis web yang membantu pasangan dalam:
 
-- Mengetahui apa yang harus dilakukan menuju hari pernikahan
-- Mengontrol progress persiapan
-- Memantau kondisi keuangan (budget & tabungan)
-- Mengurangi chaos & miskomunikasi
+- 📋 Mengetahui apa yang harus dilakukan menuju hari pernikahan
+- 📊 Mengontrol progress persiapan
+- 💰 Memantau kondisi keuangan (budget & tabungan)
+- 🤝 Mengurangi chaos & miskomunikasi
 
 ---
 
 ## Fitur
 
-### Free Plan
+### Free Plan ✅
 
-| Fitur | Deskripsi |
-|-------|-----------|
-| **Dashboard** | Countdown hari H, progress task & budget, task overdue & mendekati deadline |
-| **Timeline & Task** | 31 task auto-generate per fase, 3 status, filter assignee, task custom |
-| **Budget Tracker** | Planned vs actual per kategori, progress bar, indikator warna |
-| **Savings Tracker** | Split kontribusi, backdate entry, riwayat tabungan |
-| **Notes** | Kategori (vendor/ide/keluarga/lainnya), edit, filter |
+- **Dashboard** — Countdown hari H, progress task & budget
+- **Timeline & Task** — 31 task auto-generate, 3 status, assign ke pasangan
+- **Budget Tracker** — Planned vs actual, progress bar, indikator warna
+- **Savings Tracker** — Split kontribusi, riwayat tabungan
+- **Notes** — Catatan dengan kategori (vendor, ide, keluarga, dll)
 
-### Premium Plan
+### Premium Plan 💎
 
-| Fitur | Deskripsi |
-|-------|-----------|
-| **Charts & Insights** | Progress per fase, distribusi budget, tabungan vs pengeluaran |
+- **Charts & Insights** — Progress per fase, distribusi budget, analisis tabungan
 
 ---
 
-## Quick Start
+## Demo
+
+**Email**: `demo@wedspace.id`  
+**Password**: `demo123`
+
+---
+
+## Instalasi
+
+### Requirements
+- Node.js 18+
+- PostgreSQL 12+
+
+### Setup
 
 ```bash
-# Install dependencies
+# 1. Clone repository
+git clone https://github.com/your-username/wedspace.git
+cd wedspace
+
+# 2. Install dependencies
 npm run install:all
 
-# Copy environment file
-cp .env.example .env
+# 3. Setup database
+cd server
+npm run init
 
-# Jalankan backend (port 3001)
-npm run server
-
-# Jalankan frontend (port 5173)
-npm run client
+# 4. Start aplikasi
+npm run server    # Terminal 1
+npm run client    # Terminal 2
 ```
 
 Buka `http://localhost:5173` di browser.
 
----
-
-## Tech Stack
-
-| Layer | Teknologi |
-|-------|-----------|
-| Frontend | React 19 + Vite 8 |
-| Styling | Tailwind CSS v4 + CSS Variables |
-| State | React Context API |
-| Charts | Recharts |
-| Backend | Node.js + Express 5 |
-| Database | SQLite via sql.js |
-| Auth | JWT + bcryptjs |
-| PWA | Web App Manifest + Service Worker |
+**Lihat**: [Panduan Instalasi Lengkap](docs/setup/installation.md)
 
 ---
 
 ## Dokumentasi
 
-| Dokumen | Keterangan |
-|---------|------------|
-| [Setup & Instalasi](docs/setup.md) | Instalasi, struktur folder, environment variables |
-| [Arsitektur Sistem](docs/architecture.md) | Diagram arsitektur, auth flow, API endpoints |
-| [Struktur Data](docs/data-structure.md) | Schema database, entity relationship |
-| [Sistem Bisnis](docs/business-system.md) | Model workspace, role, free vs premium |
-| [Catatan Pengembangan](docs/development-notes.md) | Status implementasi, roadmap, known issues |
-| [Deployment](docs/deployment.md) | Panduan deploy ke production |
+### Untuk Pengguna
+- [Instalasi & Setup](docs/setup/installation.md)
+- [Troubleshooting](docs/setup/troubleshooting.md)
 
-### PRD (Archived)
+### Untuk Developer
+- [Developer Documentation](docs/README.md)
+- [Arsitektur Sistem](docs/architecture.md)
+- [Struktur Data](docs/data-structure.md)
 
-| Dokumen | Keterangan |
-|---------|------------|
-| [PRD Alpha](docs/prd-alpha.md) | Proof of concept, validasi kebutuhan inti |
-| [PRD Beta](docs/prd-beta.md) | Nama produk, model bisnis, fitur premium |
+### Untuk Deployment
+- [Panduan Deployment](docs/deployment.md)
+
+---
+
+## Tech Stack
+
+- **Frontend**: React 19 + Vite + Tailwind CSS
+- **Backend**: Node.js + Express
+- **Database**: PostgreSQL
+- **Auth**: JWT + bcryptjs
+- **Charts**: Recharts
+- **PWA**: Web App Manifest + Service Worker
+
+---
+
+## Roadmap
+
+### v0.0.2 ✅
+- Mobile experience improvements
+- Data sync reliability
+- Brand positioning refinement
+
+### v0.0.3 (Upcoming)
+- Multi-user collaboration
+- Enhanced admin features
 
 ---
 
@@ -101,3 +120,7 @@ Lihat [CHANGELOG.md](CHANGELOG.md) untuk riwayat perubahan lengkap.
 ## Lisensi
 
 Private — All rights reserved.
+
+---
+
+**Untuk dokumentasi teknis lengkap, lihat**: [Developer Documentation](docs/README.md)

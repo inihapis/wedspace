@@ -3,13 +3,35 @@ import { api } from '../utils/api'
 
 const AuthContext = createContext(null)
 
+// Check if localStorage is available (not in private browsing)
+function isLocalStorageAvailable() {
+  try {
+    const test = '__localStorage_test__'
+    localStorage.setItem(test, test)
+    localStorage.removeItem(test)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [hasWorkspace, setHasWorkspace] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [isPrivateBrowsing, setIsPrivateBrowsing] = useState(false)
 
   // Restore session on mount
   useEffect(() => {
+    const isPrivate = !isLocalStorageAvailable()
+    setIsPrivateBrowsing(isPrivate)
+    
+    if (isPrivate) {
+      console.warn('⚠️ Private Browsing detected - data may not persist between sessions')
+      setLoading(false)
+      return
+    }
+
     const token = localStorage.getItem('token')
     if (!token) {
       setLoading(false)
@@ -51,7 +73,7 @@ export function AuthProvider({ children }) {
   const markWorkspaceCreated = () => setHasWorkspace(true)
 
   return (
-    <AuthContext.Provider value={{ user, hasWorkspace, loading, login, register, logout, markWorkspaceCreated }}>
+    <AuthContext.Provider value={{ user, hasWorkspace, loading, login, register, logout, markWorkspaceCreated, isPrivateBrowsing }}>
       {children}
     </AuthContext.Provider>
   )

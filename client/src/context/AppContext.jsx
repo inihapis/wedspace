@@ -36,6 +36,15 @@ export function AppProvider({ children }) {
     }
   }, [])
 
+  // Refresh data when app comes to focus (fixes mobile data sync issues)
+  useEffect(() => {
+    const handleFocus = () => {
+      loadAll()
+    }
+    window.addEventListener('focus', handleFocus)
+    return () => window.removeEventListener('focus', handleFocus)
+  }, [loadAll])
+
   // ─── Workspace ─────────────────────────────────────────────────────────────
   const updateWorkspace = useCallback(async (data) => {
     const res = await api.updateWorkspace(data)

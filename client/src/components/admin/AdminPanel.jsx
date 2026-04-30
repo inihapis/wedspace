@@ -3,6 +3,7 @@ import { api } from '../../utils/api'
 import { useAuth } from '../../context/AuthContext'
 import { formatDate } from '../../utils/storage'
 import { adminNavItems } from '../../data/navigation'
+import AdminMobileHeader from '../layouts/AdminMobileHeader'
 
 
 export default function AdminPanel() {
@@ -57,7 +58,12 @@ export default function AdminPanel() {
         <AdminSidebar view={view} setView={setView} logout={logout} />
       </div>
 
-      <main className="flex-1 overflow-auto p-6 pb-28 md:pb-6">
+      {/* Mobile header */}
+      <div className="md:hidden">
+        <AdminMobileHeader logout={logout} />
+      </div>
+
+      <main className="flex-1 overflow-auto p-6 pb-28 md:pb-6 pt-16 md:pt-0">
         {loading ? (
           <div className="flex items-center justify-center h-64">
             <p className="text-sm text-text-subtle">Memuat data...</p>

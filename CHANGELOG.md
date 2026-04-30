@@ -23,6 +23,38 @@ dan proyek ini mengikuti [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ---
 
+## [0.0.2] — May 2026 (Mobile Experience & Brand Positioning)
+
+Fokus pada peningkatan mobile experience, reliabilitas data sync, penyempurnaan brand positioning, dan cleanup setup.
+
+### Added
+- **AdminMobileHeader** — Mobile header untuk admin panel dengan direct logout button (tanpa dropdown redundan)
+- **Auto-refresh on Focus** — Data otomatis refresh ketika app kembali ke foreground via `window.focus` event
+- **Private Browsing Detection** — Deteksi localStorage availability di AuthContext, expose `isPrivateBrowsing` flag
+- **Dokumentasi terstruktur** — Folder `docs/` diorganisir dengan subfolder `releases/`, `setup/`, `guides/`
+
+### Changed
+- **Tagline & Meta Description** — "Persiapan nikah jadi lebih tenang" → "Platform yang membantu Anda mempersiapkan pernikahan dengan lebih terorganisir" (di `index.html` dan `AuthPage.jsx`)
+- **Theme Color** — `#1a56db` (biru) → `#2B2B2B` (dark) di `index.html`, konsisten dengan design system dan `manifest.json`
+- **Admin Mobile UX** — Dropdown menu dihapus, diganti direct logout button
+
+### Fixed
+- **Demo credentials di SETUP.md** — Diperbaiki dari `demo@wedspace.com / Demo123456` ke `demo@wedspace.id / demo123`
+- **Duplicate env vars** — `ADMIN_EMAIL` & `ADMIN_PASSWORD` duplikat dihapus dari `server/.env`
+- **`.env.example`** — Database name diupdate dari `weddingprep` ke `wedspace`, variabel tidak terpakai dihapus
+
+### Removed
+- **`sql.js` dependency** — Dihapus dari root `package.json` (project menggunakan PostgreSQL)
+- **Unused imports** — `DEFAULT_BUDGET_ITEMS` dan `all` dihapus dari `server/scripts/migrate.js`
+- **Dokumentasi duplikat** — 12+ file dokumentasi di root dikonsolidasi ke `docs/`
+
+### Technical
+- `AppContext`: tambah focus event listener untuk auto-refresh
+- `AuthContext`: tambah `isLocalStorageAvailable()` helper dan `isPrivateBrowsing` state
+- Build: 2318 modules, ~455ms, no errors
+
+---
+
 ## [0.0.1a] — 2026 (Component Refactoring & Navigation Polish)
 
 Rilis alpha dengan fokus pada refactoring komponen dan penyempurnaan navigasi.
@@ -155,7 +187,9 @@ Fase alpha — proof of concept, validasi kebutuhan inti, belum ada nama produk 
 
 ---
 
-[Unreleased]: https://github.com/your-org/wedspace/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/your-org/wedspace/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/your-org/wedspace/compare/v0.0.1a...v0.0.2
+[0.0.1a]: https://github.com/your-org/wedspace/compare/v0.0.1...v0.0.1a
 [0.0.1]: https://github.com/your-org/wedspace/compare/beta...v0.0.1
 [Beta]: https://github.com/your-org/wedspace/compare/alpha...beta
 [Alpha]: https://github.com/your-org/wedspace/releases/tag/alpha

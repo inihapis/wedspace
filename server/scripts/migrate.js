@@ -1,6 +1,6 @@
-const { pool, initSchema, run, get, all } = require('../db')
+const { pool, initSchema, run, get } = require('../db')
 const bcrypt = require('bcryptjs')
-const { generateTasks, DEFAULT_BUDGET_ITEMS } = require('../utils/taskGenerator')
+const { generateTasks } = require('../utils/taskGenerator')
 
 async function dropAllTables() {
   try {

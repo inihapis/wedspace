@@ -30,7 +30,7 @@ export default function AuthPage() {
   const inputCls = 'w-full px-4 py-3 rounded-xl border border-border text-text text-sm transition-all focus:outline-none focus:border-accent'
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-bg">
+    <div className="min-h-screen h-screen flex items-center justify-center p-4 bg-bg">
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
@@ -43,17 +43,17 @@ export default function AuthPage() {
         <div className="text-center mb-8">
           <img src="/logo/Logo-Color.png" alt="Wedspace" className="mx-auto mb-4 h-14 w-14 rounded-2xl object-cover shadow-lg" />
           <h1 className="font-bold text-2xl tracking-tight mb-1 text-text">Wedspace</h1>
-          <p className="text-sm text-text-muted">Persiapan nikah jadi lebih tenang</p>
+          <p className="text-sm text-text-muted">Platform yang membantu Anda mempersiapkan pernikahan dengan lebih terorganisir</p>
         </div>
 
         <div className="rounded-2xl p-6 bg-surface border border-border shadow-md">
           {/* Tab */}
-          <div className="flex rounded-xl p-1 mb-6 bg-bg">
+          <div className="flex rounded-xl p-2 mb-6 bg-bg gap-2 bg-accent-light">
             {['login', 'register'].map((m) => (
               <button key={m} onClick={() => { setMode(m); setError('') }}
                 className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${
                   mode === m
-                    ? 'bg-surface text-text shadow-xs'
+                    ? 'text-text bg-white'
                     : 'text-text-muted'
                 }`}>
                 {m === 'login' ? 'Masuk' : 'Daftar'}
