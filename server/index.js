@@ -7,6 +7,13 @@ const { initSchema, get, run } = require('./db')
 const app = express()
 const PORT = process.env.PORT || 3001
 
+// Parse CORS_ORIGINS from environment variable
+// Format: "http://localhost:5173,https://wedspace-five.vercel.app,https://example.com"
+const getCorsOrigins = () => {
+  const corsEnv = process.env.CORS_ORIGINS || 'http://localhost:5173'
+  return corsEnv.split(',').map(origin => origin.trim())
+}
+
 // Seed admin user on startup
 async function seedAdmin() {
   try {
@@ -28,7 +35,14 @@ async function seedAdmin() {
 initSchema().then(() => {
   console.log('Database initialized')
 
-  app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+  // Setup CORS with multiple origins
+  const corsOrigins = getCorsOrigins()
+  console.log(`✅ CORS enabled for: ${corsOrigins.join(', ')}`)
+  
+  app.use(cors({ 
+    origin: corsOrigins, 
+    credentials: true 
+  }))
   app.use(express.json())
 
   // Routes
