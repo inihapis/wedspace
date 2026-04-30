@@ -20,9 +20,18 @@ PORT=3001
 ```
 
 #### Client (.env di client/)
+Sudah ada di `client/.env`:
 ```bash
-VITE_API_URL=http://localhost:3001/api
+# API Configuration
+# Development: http://localhost:3001/api
+# Production: Set in Vercel environment variables
+VITE_API_BASE_URL=http://localhost:3001/api
 ```
+
+**Untuk Production (Vercel):**
+- Set `VITE_API_BASE_URL` di Vercel dashboard
+- Contoh: `https://your-railway-domain.up.railway.app/api`
+- Lihat `docs/deployment.md` untuk detail lebih lanjut
 
 ### 3. Initialize Database (One Command!)
 ```bash
