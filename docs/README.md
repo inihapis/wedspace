@@ -69,7 +69,8 @@ See [Installation & Setup](./setup/installation.md) for details.
 - [CORS Configuration](./guides/cors-configuration.md)
 
 ### Release Notes
-- [v0.0.2](./releases/v0.0.2.md) - Latest
+- [v0.0.3](./releases/v0.0.3.md) - Latest
+- [v0.0.2](./releases/v0.0.2.md)
 - [v0.0.1a](./releases/v0.0.1a.md)
 
 ### Product
@@ -174,9 +175,9 @@ npm run lint           # Run linter
 
 ## 📝 Version
 
-- **Current**: v0.0.2
-- **Latest Release**: [v0.0.2](./releases/v0.0.2.md)
-- **Previous**: [v0.0.1a](./releases/v0.0.1a.md)
+- **Current**: v0.0.3
+- **Latest Release**: [v0.0.3](./releases/v0.0.3.md)
+- **Previous**: [v0.0.2](./releases/v0.0.2.md)
 
 ---
 

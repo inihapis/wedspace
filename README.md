@@ -89,31 +89,35 @@ Buka `http://localhost:5173` di browser.
 
 ## Tech Stack
 
-- **Frontend**: React 19 + Vite + Tailwind CSS
+- **Frontend**: React 19 + Vite + Tailwind CSS v4
 - **Backend**: Node.js + Express
 - **Database**: PostgreSQL
 - **Auth**: JWT + bcryptjs
 - **Charts**: Recharts
-- **PWA**: Web App Manifest + Service Worker
+- **PWA**: Web App Manifest + Service Worker + IndexedDB
 
 ---
 
 ## Roadmap
 
-### v0.0.2 ✅
-- Mobile experience improvements
-- Data sync reliability
-- Brand positioning refinement
+### v0.0.3 ✅
+- UI/UX overhaul — luxury & elegant design system
+- PWA upgrade — offline support, multi-tenant safe caching
+- Profile settings page
+- Infrastructure fixes (deploy command, gitignore, admin seed)
 
-### v0.0.3 (Upcoming)
-- Multi-user collaboration
-- Enhanced admin features
+### v0.0.4 (Upcoming)
+- Code splitting & bundle optimization
+- DB schema: `partner_a_nickname`, `partner_b_nickname` columns
+- Extended admin features
 
 ---
 
 ## Changelog
 
 Lihat [CHANGELOG.md](CHANGELOG.md) untuk riwayat perubahan lengkap.
+
+**Current version**: v0.0.3
 
 ---
 

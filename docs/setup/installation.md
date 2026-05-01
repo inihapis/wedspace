@@ -11,7 +11,7 @@ npm run install:all
 
 #### Server (.env di server/)
 ```bash
-DATABASE_URL=postgresql://dwikyalvin76:12141618@localhost:5432/wedspace
+DATABASE_URL=postgresql://USERNAME:PASSWORD@localhost:5432/wedspace
 NODE_ENV=development
 JWT_SECRET=wedspace_jwt_secret_change_in_production_2025
 JWT_EXPIRES_IN=7d

@@ -14,8 +14,15 @@ dist-ssr
 
 # Environment variables
 .env
+.env.*
+!.env.example
 client/.env
+client/.env.*
 server/.env
+server/.env.*
+
+# Kiro IDE
+.kiro/
 
 # Editor directories and files
 .vscode/*
@@ -27,5 +34,8 @@ server/.env
 *.njsproj
 *.sln
 *.sw?
-.kiro/*
-.kiro/**
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

@@ -1,12 +1,13 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { api } from '../utils/api'
+import { idbClearUser } from '../utils/idb'
+import { notifySWLogout, onSWMessage } from '../utils/pwa'
 
 const AuthContext = createContext(null)
 
-// Check if localStorage is available (not in private browsing)
 function isLocalStorageAvailable() {
   try {
-    const test = '__localStorage_test__'
+    const test = '__ls_test__'
     localStorage.setItem(test, test)
     localStorage.removeItem(test)
     return true
@@ -16,18 +17,18 @@ function isLocalStorageAvailable() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
+  const [user, setUser]               = useState(null)
   const [hasWorkspace, setHasWorkspace] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading]         = useState(true)
   const [isPrivateBrowsing, setIsPrivateBrowsing] = useState(false)
 
   // Restore session on mount
   useEffect(() => {
     const isPrivate = !isLocalStorageAvailable()
     setIsPrivateBrowsing(isPrivate)
-    
+
     if (isPrivate) {
-      console.warn('⚠️ Private Browsing detected - data may not persist between sessions')
+      console.warn('⚠️ Private Browsing — data may not persist')
       setLoading(false)
       return
     }
@@ -37,6 +38,7 @@ export function AuthProvider({ children }) {
       setLoading(false)
       return
     }
+
     api.me()
       .then(({ user, hasWorkspace }) => {
         setUser(user)
@@ -46,6 +48,16 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('token')
       })
       .finally(() => setLoading(false))
+  }, [])
+
+  // Listen for SW revalidation requests
+  useEffect(() => {
+    const unsub = onSWMessage((msg) => {
+      if (msg?.type === 'REVALIDATE_REQUESTED') {
+        // AppContext will handle actual refetch via its own listener
+      }
+    })
+    return unsub
   }, [])
 
   const login = async (email, password) => {
@@ -64,16 +76,29 @@ export function AuthProvider({ children }) {
     return data
   }
 
-  const logout = () => {
+  const logout = async () => {
+    const currentUser = user
+
+    // Clear app state first
     localStorage.removeItem('token')
     setUser(null)
     setHasWorkspace(false)
+
+    // Clear user's IDB data and notify SW — fire and forget
+    if (currentUser?.id) {
+      idbClearUser(currentUser.id).catch(() => {})
+      notifySWLogout(currentUser.id).catch(() => {})
+    }
   }
 
   const markWorkspaceCreated = () => setHasWorkspace(true)
 
   return (
-    <AuthContext.Provider value={{ user, hasWorkspace, loading, login, register, logout, markWorkspaceCreated, isPrivateBrowsing }}>
+    <AuthContext.Provider value={{
+      user, hasWorkspace, loading,
+      login, register, logout, markWorkspaceCreated,
+      isPrivateBrowsing,
+    }}>
       {children}
     </AuthContext.Provider>
   )

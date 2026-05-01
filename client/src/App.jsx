@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { AppProvider } from './context/AppContext'
+import { useApp } from './context/AppContext'
 import { Sidebar, MobileHeader, MobileNav } from './components/layouts'
 import {
   AuthPage,
@@ -16,6 +17,7 @@ import AdminPanel from './components/admin/AdminPanel'
 
 function AppShell() {
   const { user, hasWorkspace, loading: authLoading } = useAuth()
+  const { offline } = useApp()
   const [currentView, setCurrentView] = useState('dashboard')
 
   if (authLoading) {
@@ -52,6 +54,16 @@ function AppShell() {
 
   return (
     <div className="flex h-screen" style={{ background: 'var(--color-bg)' }}>
+      {/* Offline banner */}
+      {offline && (
+        <div
+          className="fixed top-0 left-0 right-0 z-100 flex items-center justify-center gap-2 py-2 text-xs font-medium"
+          style={{ background: '#B45309', color: 'white' }}
+        >
+          <span>📡</span>
+          <span>Kamu sedang offline — menampilkan data terakhir yang tersimpan</span>
+        </div>
+      )}
       {/* Desktop sidebar */}
       <div className="hidden md:block">
         <Sidebar currentView={currentView} setCurrentView={setCurrentView} />

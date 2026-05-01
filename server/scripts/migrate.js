@@ -20,6 +20,35 @@ async function dropAllTables() {
   }
 }
 
+async function seedAdminUser() {
+  try {
+    console.log('👑 Seeding admin user...')
+
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@wedspace.id'
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin123456'
+    const passwordHash = await bcrypt.hash(adminPassword, 10)
+
+    const existing = await get('SELECT id FROM users WHERE email = $1', [adminEmail])
+    if (!existing) {
+      await run(
+        'INSERT INTO users (email, password_hash, role) VALUES ($1, $2, $3)',
+        [adminEmail, passwordHash, 'admin']
+      )
+      console.log(`✅ Admin user created: ${adminEmail}`)
+    } else {
+      // Pastikan role-nya admin (bisa jadi sebelumnya salah)
+      await run('UPDATE users SET role = $1 WHERE email = $2', ['admin', adminEmail])
+      console.log(`✅ Admin user already exists (role ensured)`)
+    }
+
+    console.log(`   Email   : ${adminEmail}`)
+    console.log(`   Password: ${adminPassword}`)
+  } catch (error) {
+    console.error('❌ Error seeding admin user:', error.message)
+    throw error
+  }
+}
+
 async function seedDemoData() {
   try {
     console.log('🌱 Seeding demo data...')
@@ -207,10 +236,16 @@ async function migrate() {
     // Initialize new schema
     await initSchema()
 
+    // Seed admin user
+    await seedAdminUser()
+
     // Seed demo data
     await seedDemoData()
 
     console.log('\n✅ Migration completed successfully!')
+    console.log('\n📝 Next steps:')
+    console.log('   1. Start server: npm run dev (from server/)')
+    console.log('   2. Start client: npm run dev (from client/)')
     process.exit(0)
   } catch (error) {
     console.error('\n❌ Migration failed:', error.message)
